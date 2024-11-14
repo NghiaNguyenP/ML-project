@@ -4,14 +4,14 @@ import time
 import pandas as pd
 
 driver = webdriver.Chrome()
-driver.get("https://twitter.com/search?q=racist&src=typed_query")
+driver.get("https://x.com/search?q=hate%20speech&src=typed_query&f=top")
 
 time.sleep(60)  #Time to log in before start scrolling
 
 tweets = []
 tweet_id = 1
 
-while len(tweets) < 5: #number of samples
+while len(tweets) < 20: #number of samples
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     time.sleep(10)  # Time between scroll
     # Get the page source and parse it
@@ -38,7 +38,7 @@ while len(tweets) < 5: #number of samples
                 tweets.append({"id": tweet_id, "user": user, "content": content})
                 tweet_id += 1
 
-            if len(tweets) >= 5:
+            if len(tweets) >= 20:
                 break
 
         except Exception as e:
